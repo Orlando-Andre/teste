@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Relatório</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Relatórios</h1>
+    </header>
+    <section>
+        <button id="gerarPdfButton">Gerar Relatório</button>
+        
+    </section>
+    <footer>
+        <p>&copy;Orlando André</p>
+    </footer>
+
+
+    <Script>
+
+        $(document).ready(function() {
+
+            $("#gerarPdfButton").click(function() {
+                // Fazer uma solicitação Ajax para o endpoint de geração de PDF
+                $.ajax({
+                    url: "http://localhost:9191/teste/gerarPdf", 
+                    type: "GET",
+                    success: function(data) {
+                        // A resposta deve ser o PDF gerado
+                        // Exibir o PDF em uma nova janela
+                        var blob = new Blob([data], { type: 'application/pdf' });
+                        var url = window.URL.createObjectURL(blob);
+                        window.open(url);
+                    },
+                    error: function() {
+                        alert("Erro ao gerar o PDF");
+                    }
+                });
+            });
+        });
+
+        
+
+    </Script>
+    
+</body>
+</html>
